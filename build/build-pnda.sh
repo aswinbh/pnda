@@ -61,24 +61,12 @@ function invocation_error {
 # List of PNDA components
 #
 declare -A bom=(
-[platform-console-backend]=
-[platform-console-frontend]=
-[platform-data-mgmnt]=
-[platform-deployment-manager]=
-[platform-libraries]=
-[platform-package-repository]=
-[platform-testing]=
-[platform-gobblin-modules]=
 )
 
 # List of upstream projects
 #
 declare -A upstream=(
-[kafkamanager]=
-[jupyterproxy]=
-[kafkatool]=
-[livy]=
-[gobblin]=
+[flink]=
 )
 
 function fill_bom {
