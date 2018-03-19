@@ -68,17 +68,14 @@ do
     mvn clean install -DskipTests -Pvendor-repos -Dhadoop.version="${HADOOP_VERSION}"
 
     if [[ "${HADOOP_DISTRIBUTION}" == "HDP" ]]; then
-	    JAR=$(<../../../upstream-builds/dependencies/upstream-flink-hdp-dependencies.txt)
-	    FLINK_DIR="./flink-dist/target/flink-${FLINK_VERSION}-bin/flink-${FLINK_VERSION}"
-	    FLINK_LIB_DIR="$FLINK_DIR/lib"
-	    if [ -d $FLINK_LIB_DIR ]; then
-		    cd $FLINK_LIB_DIR
-		    wget $JAR
-		    cd -
-            else
-		    echo "$FLINK_LIB_DIR directory is not available "
-		    exit 1
-	    fi
+        JAR=$(<../../../upstream-builds/dependencies/upstream-flink-hdp-dependencies.txt)
+        FLINK_DIR="./flink-dist/target/flink-${FLINK_VERSION}-bin/flink-${FLINK_VERSION}"
+        FLINK_LIB_DIR="$FLINK_DIR/lib"
+        if [ -d $FLINK_LIB_DIR ]; then
+            wget $JAR -P $FLINK_LIB_DIR
+        else
+            error 
+        fi
     fi
 
     tar -cvf flink-${FLINK_VERSION}-${HADOOP_DISTRIBUTION}.tar.gz -C ./flink-dist/target/flink-${FLINK_VERSION}-bin/flink-${FLINK_VERSION} .
